@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="VocabPro - Master languages, translate effortlessly, and explore the depth of words with our AI Wordplay master in a beautifully Eastern-themed environment." />
+    <title>VocabPro | Eastern Language Mastery</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Google Fonts for Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Outfit:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Decorative background elements -->
+    <div class="bg-decor top-left"></div>
+    <div class="bg-decor bottom-right"></div>
+    <div class="enso-circle"></div>
+
+    <!-- Particles Engine Container -->
+    <div class="sakura-container" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <span class="logo-icon"
+                    style="box-shadow: 0 0 10px var(--imperial-gold); border: 1px solid var(--imperial-gold);">和</span>
+                VocabPro
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#translate">Translate</a></li>
+                <li><a href="#wordplay">AI Wordplay</a></li>
+                <li><a href="#learn">Learn</a></li>
+            </ul>
+            <button class="btn btn-outline" id="nav-signin-btn"
+                style="margin-left: 1rem; padding: 0.5rem 1.5rem; font-size: 1rem;">Sign In</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+
+        <div class="hero-content text-center">
+            <h1 class="hero-title">Master the Art of <span class="text-red"
+                    style="font-family: 'Noto Serif JP';">Language</span></h1>
+            <p class="hero-subtitle">Immerse yourself in a beautifully crafted journey of words, guided by the wisdom of
+                the East, under the shade of blooming sakura and the quiet serenity of feudal Japan.</p>
+            <a href="#learn" class="btn btn-primary"
+                style="box-shadow: 0 0 15px rgba(255, 204, 0, 0.4); border-color: var(--imperial-gold);">Walk the
+                Path</a>
+        </div>
+    </section>
+
+    <!-- Translator Section -->
+    <section id="translate" class="section glass-panel">
+        <div class="section-header">
+            <h2>The Bridge of Words</h2>
+            <p>Translate sentences, phrases, and words effortlessly</p>
+        </div>
+        <div class="translator-container">
+            <div class="lang-controls">
+                <select id="source-lang" class="lang-select">
+                    <option value="en">English</option>
+                    <option value="ja">Japanese</option>
+                    <option value="zh">Chinese</option>
+                    <option value="ko">Korean</option>
+                </select>
+                <button id="swap-lang" aria-label="Swap Languages" class="btn-icon">
+                    <i class="fa-solid fa-right-left"></i>
+                </button>
+                <select id="target-lang" class="lang-select">
+                    <option value="ja">Japanese</option>
+                    <option value="en">English</option>
+                    <option value="zh">Chinese</option>
+                    <option value="ko">Korean</option>
+                </select>
+            </div>
+            <div class="translator-boxes">
+                <textarea id="source-text" placeholder="Enter text to translate..." class="trans-box"
+                    aria-label="Source text"></textarea>
+                <div class="trans-box result-box" id="target-text">Translation will appear here...</div>
+            </div>
+            <button class="btn btn-accent mt-4" onclick="translateText()">Translate</button>
+        </div>
+    </section>
+
+    <!-- AI Wordplay Section -->
+    <section id="wordplay" class="section">
+        <div class="section-header">
+            <h2>The Mind's Canvas <span class="tag">AI</span></h2>
+            <p>Discover the poetry and playfulness of language with our AI Wordplay master.</p>
+        </div>
+        <div class="chat-container glass-panel">
+            <div class="chat-box" id="chat-box">
+                <div class="msg ai-msg">
+                    <div class="msg-avatar">仙</div>
+                    <div class="msg-content">Welcome, traveler. Give me a word, and I shall reveal its hidden poetry and
+                        playfulness.</div>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="wordplay-input" placeholder="Type a word or phrase..."
+                    aria-label="Wordplay Input" />
+                <button class="btn btn-primary" onclick="sendWordplay()">Ask AI</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learn Section -->
+    <section id="learn" class="section">
+        <div class="section-header">
+            <h2>Path to Mastery</h2>
+            <p>Begin your structured learning in the language of your choice.</p>
+        </div>
+        <div class="card-grid">
+            <!-- Japanese -->
+            <div class="card" onclick="openLearnModal('Japanese')">
+                <div class="card-icon">🇯🇵</div>
+                <h3>Japanese</h3>
+                <p>Master Kanji</p>
+            </div>
+            <!-- Chinese -->
+            <div class="card" onclick="openLearnModal('Chinese')">
+                <div class="card-icon">🇨🇳</div>
+                <h3>Chinese</h3>
+                <p>Master Hanzi</p>
+            </div>
+            <!-- Latin American Spanish -->
+            <div class="card" onclick="openLearnModal('Latin American Spanish')">
+                <div class="card-icon">🇲🇽</div>
+                <h3>Latin American Spanish</h3>
+                <p>Master Español</p>
+            </div>
+            <!-- Russian -->
+            <div class="card" onclick="openLearnModal('Russian')">
+                <div class="card-icon">🇷🇺</div>
+                <h3>Russian</h3>
+                <p>Master Cyrillic</p>
+            </div>
+            <!-- French -->
+            <div class="card" onclick="openLearnModal('French')">
+                <div class="card-icon">🇫🇷</div>
+                <h3>French</h3>
+                <p>Master Français</p>
+            </div>
+            <!-- Italian -->
+            <div class="card" onclick="openLearnModal('Italian')">
+                <div class="card-icon">🇮🇹</div>
+                <h3>Italian</h3>
+                <p>Master Italiano</p>
+            </div>
+            <!-- German -->
+            <div class="card" onclick="openLearnModal('German')">
+                <div class="card-icon">🇩🇪</div>
+                <h3>German</h3>
+                <p>Master Deutsch</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-login">Sign In</button>
+                <button class="auth-tab" id="tab-signup">Create Account</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active">
+                <div class="form-group">
+                    <label>Username or Account Number (12 digits)</label>
+                    <input type="text" id="login-identifier" required placeholder="e.g. MasterYoda or 123456789012" />
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" required />
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-4">Sign In</button>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signup-form" class="auth-form">
+                <div class="form-group">
+                    <label>Username (Required)</label>
+                    <input type="text" id="signup-username" required placeholder="Choose a username" />
+                </div>
+                <div class="form-group">
+                    <label>Email (Optional - for updates only)</label>
+                    <input type="email" id="signup-email" placeholder="example@mail.com" />
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password-input-group">
+                        <input type="password" id="signup-password" required minlength="10"
+                            placeholder="Minimum 10 characters" />
+                        <button type="button" class="btn-icon small" id="generate-pw-btn"
+                            title="Auto-generate secure password"><i
+                                class="fa-solid fa-wand-magic-sparkles"></i></button>
+                    </div>
+                    <small class="pw-requirements">At least 10 chars: 1 uppercase, 1 lowercase, 1 number, 1
+                        symbol</small>
+                </div>
+
+                <div id="signup-success-msg" class="hidden mt-4"
+                    style="text-align: center; color: var(--imperial-gold);">
+                    <p>Account created successfully!</p>
+                    <div class="result-box mt-4"
+                        style="padding: 1rem; border: 1px solid var(--imperial-gold); background: rgba(20,20,20,0.9);">
+                        <p style="color: var(--paper-white); margin-bottom: 0.5rem; font-size: 0.9rem;">Your Account
+                            Number (Save this securely!)</p>
+                        <h3 id="account-number-display" class="text-red" style="letter-spacing: 2px;"></h3>
+                    </div>
+                    <button type="button" class="btn btn-outline w-100 mt-4" id="proceed-login-btn">Proceed to
+                        Login</button>
+                </div>
+
+                <button type="submit" id="signup-submit-btn" class="btn btn-primary w-100 mt-4">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Learn Content Modal -->
+    <div id="learn-modal" class="modal">
+        <div class="modal-content glass-panel" style="max-width: 600px;">
+            <span class="close-btn" id="close-learn-modal">&times;</span>
+            <h2 id="learn-lang-title" style="color: var(--imperial-gold); margin-bottom: 0.5rem; text-align: center;">
+                Language Name</h2>
+            <p style="color: var(--text-muted); text-align: center; margin-bottom: 2rem;">Choose your path to mastery.
+            </p>
+
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                <!-- Academic / Grade Level -->
+                <div class="card" style="padding: 1.5rem;" onclick="startLearningPath('grade')">
+                    <h3 style="margin-bottom: 0.5rem;"><i class="fa-solid fa-graduation-cap"></i> Grade Level</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Learn by elementary school grade pacing,
+                        focusing on natural acquisition.</p>
+                </div>
+
+                <!-- Official Standard Level -->
+                <div class="card" style="padding: 1.5rem;" onclick="startLearningPath('official')">
+                    <h3 id="learn-official-title" style="margin-bottom: 0.5rem;"><i class="fa-solid fa-certificate"></i>
+                        Official Level</h3>
+                    <p id="learn-official-desc" style="font-size: 0.85rem; color: var(--text-muted);">Master structured
+                        levels (e.g. JLPT, CEFR) for certification.</p>
+                </div>
+
+                <!-- Self Learning Path -->
+                <div class="card" style="padding: 1.5rem;" onclick="startLearningPath('self')">
+                    <h3 style="margin-bottom: 0.5rem;"><i class="fa-solid fa-compass"></i> Self Learning</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">A beautifully tailored path curated based
+                        on your pace, choices, and goals.</p>
+                </div>
+            </div>
+
+            <div id="learning-path-details" class="hidden"
+                style="border-top: 1px solid var(--glass-border); padding-top: 1.5rem;">
+                <h3 id="path-selection-title" style="color: var(--imperial-gold); margin-bottom: 1rem;">Select Level
+                </h3>
+                <div id="path-levels-container"
+                    style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
+                    <!-- Levels injected via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 VocabPro. Crafted with serenity and focus.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
