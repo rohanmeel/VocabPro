@@ -16,11 +16,11 @@ function createSingleParticle(container) {
   const particle = document.createElement('div');
   particle.className = 'sakura'; 
 
-  // Randomize starting position, animation duration, and delay
-  const startX = Math.random() * 100; // 0 to 100vw
-  const duration = Math.random() * 5 + 5; // 5 to 10 seconds
-  const delay = Math.random() * 5; // 0 to 5 seconds delay
-  const size = (Math.random() * 10 + 10); // random sizing
+
+  const startX = Math.random() * 100; 
+  const duration = Math.random() * 5 + 5; 
+  const delay = Math.random() * 5; 
+  const size = (Math.random() * 10 + 10);
 
   particle.style.left = `${startX}vw`;
   particle.style.animationDuration = `${duration}s`;
@@ -31,17 +31,17 @@ function createSingleParticle(container) {
 
   container.appendChild(particle);
 
-  // Re-create particle when animation ends to keep the loop infinite but dynamic
+
   setTimeout(() => {
     particle.remove();
     createSingleParticle(container);
   }, (duration + delay) * 1000);
 }
 
-// Initialize particles on load
+
 window.addEventListener('DOMContentLoaded', createParticles);
 
-// -- Navbar scroll effect --
+
 let lastScrollY = window.scrollY;
 
 window.addEventListener('scroll', () => {
@@ -50,13 +50,13 @@ window.addEventListener('scroll', () => {
 
   if (currentScrollY > 50) {
     navbar.style.background = 'rgba(8, 3, 3, 0.95)';
-    navbar.style.boxShadow = '0 4px 20px rgba(143, 172, 145, 0.2)'; // Peaceful Bamboo Green shadow
+    navbar.style.boxShadow = '0 4px 20px rgba(143, 172, 145, 0.2)'; 
   } else {
     navbar.style.background = 'rgba(8, 3, 3, 0.8)';
     navbar.style.boxShadow = 'none';
   }
 
-  // Hide on scroll down, show on scroll up
+  
   if (currentScrollY > lastScrollY && currentScrollY > 100) {
     navbar.classList.add('nav-hidden');
   } else {
@@ -66,7 +66,7 @@ window.addEventListener('scroll', () => {
   lastScrollY = currentScrollY;
 });
 
-// -- Auth Modal feature --
+
 const navSigninBtn = document.getElementById('nav-signin-btn');
 const authModal = document.getElementById('auth-modal');
 const closeModal = document.getElementById('close-modal');
@@ -75,25 +75,25 @@ const tabSignup = document.getElementById('tab-signup');
 const loginForm = document.getElementById('login-form');
 const signupForm = document.getElementById('signup-form');
 
-// Show modal
+
 navSigninBtn.addEventListener('click', () => {
   authModal.classList.add('show');
   resetAuthForms();
 });
 
-// Close modal
+
 closeModal.addEventListener('click', () => {
   authModal.classList.remove('show');
 });
 
-// Close on outside click
+
 window.addEventListener('click', (e) => {
   if (e.target === authModal) {
     authModal.classList.remove('show');
   }
 });
 
-// Switch tabs
+
 tabLogin.addEventListener('click', () => {
   tabLogin.classList.add('active');
   tabSignup.classList.remove('active');
@@ -108,7 +108,7 @@ tabSignup.addEventListener('click', () => {
   loginForm.classList.remove('active');
 });
 
-// Form reset helper
+
 function resetAuthForms() {
   loginForm.reset();
   signupForm.reset();
@@ -116,7 +116,7 @@ function resetAuthForms() {
   document.getElementById('signup-submit-btn').classList.remove('hidden');
 }
 
-// Password Generator
+
 const generatePwBtn = document.getElementById('generate-pw-btn');
 const signupPassword = document.getElementById('signup-password');
 
@@ -128,7 +128,7 @@ generatePwBtn.addEventListener('click', () => {
     sym: '!@#$%^&*()_+~`|}{[]:;?><,./-='
   };
 
-  // Guarantee at least one of each mandatory requirement
+  
   let password = '';
   password += chars.upper[Math.floor(Math.random() * chars.upper.length)];
   password += chars.lower[Math.floor(Math.random() * chars.lower.length)];
@@ -137,17 +137,17 @@ generatePwBtn.addEventListener('click', () => {
 
   const allChars = chars.upper + chars.lower + chars.num + chars.sym;
 
-  // Fill the rest up to 12 chars (safely over the 10 minimum limit)
+  
   for (let i = 4; i < 12; i++) {
     password += allChars[Math.floor(Math.random() * allChars.length)];
   }
 
-  // Shuffle string
+  
   password = password.split('').sort(() => 0.5 - Math.random()).join('');
 
   signupPassword.value = password;
 
-  // Change out type to text momentarily so user can see it
+  
   signupPassword.type = 'text';
   generatePwBtn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
 
@@ -157,7 +157,7 @@ generatePwBtn.addEventListener('click', () => {
   }, 3000);
 });
 
-// Password Validation Rule
+
 function validatePassword(pw) {
   const hasUpper = /[A-Z]/.test(pw);
   const hasLower = /[a-z]/.test(pw);
@@ -166,7 +166,7 @@ function validatePassword(pw) {
   return pw.length >= 10 && hasUpper && hasLower && hasNum && hasSym;
 }
 
-// Handle Sign Up
+
 signupForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -176,7 +176,7 @@ signupForm.addEventListener('submit', (e) => {
     return;
   }
 
-  // Generate 12-digit account number (100000000000 to 999999999999)
+  
   const accountNum = Math.floor(Math.random() * 900000000000) + 100000000000;
 
   document.getElementById('account-number-display').innerText = accountNum;
@@ -184,13 +184,13 @@ signupForm.addEventListener('submit', (e) => {
   document.getElementById('signup-success-msg').classList.remove('hidden');
 });
 
-// Proceeds to login
+
 document.getElementById('proceed-login-btn').addEventListener('click', () => {
   tabLogin.click();
   document.getElementById('login-identifier').value = document.getElementById('account-number-display').innerText;
 });
 
-// Handle Login Mock
+
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const ident = document.getElementById('login-identifier').value;
@@ -199,7 +199,7 @@ loginForm.addEventListener('submit', (e) => {
 });
 
 
-// -- Translator feature --
+
 const swapBtn = document.getElementById('swap-lang');
 const sourceLang = document.getElementById('source-lang');
 const targetLang = document.getElementById('target-lang');
@@ -222,7 +222,7 @@ async function translateText() {
   const text = sourceText.value.trim();
   if (!text) {
     targetText.innerText = 'Please enter text to translate.';
-    targetText.style.color = '#ffb7c5'; // Cherry blossom error color
+    targetText.style.color = '#ffb7c5'; 
     return;
   }
 
@@ -233,13 +233,13 @@ async function translateText() {
   const tLang = targetLang.value;
 
   try {
-    // Calling the free Google Translate API endpoint
+    
     const response = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sLang}&tl=${tLang}&dt=t&q=${encodeURIComponent(text)}`);
     const data = await response.json();
 
     let translatedText = '';
     if (data && data[0]) {
-      // Loop through translation segments in case of longer sentences
+      
       data[0].forEach(item => {
         if (item[0]) translatedText += item[0];
       });
@@ -249,7 +249,7 @@ async function translateText() {
 
     targetText.style.color = '#fdfbf7';
 
-    // Output translation maintaining standard/casual structure for premium UI feel
+    
     targetText.innerHTML = `
         <div style="margin-bottom: 0.8rem;">
             <strong style="color: var(--imperial-gold); font-size: 0.9em; text-transform: uppercase;">Standard (Google Translate API):</strong><br>
@@ -268,7 +268,7 @@ async function translateText() {
   }
 }
 
-// -- AI Wordplay feature --
+
 const chatBox = document.getElementById('chat-box');
 const wordplayInput = document.getElementById('wordplay-input');
 
@@ -282,18 +282,15 @@ async function sendWordplay() {
   const text = wordplayInput.value.trim();
   if (!text) return;
 
-  // Add user message to chat
+  
   appendMessage(text, 'user');
   wordplayInput.value = '';
 
-  // Simulate AI "thinking"
+ 
   const thinkingId = appendMessage('<i class="fa-solid fa-circle-notch fa-spin"></i> Consulting my ancient dictionary scrolls...', 'ai');
 
   try {
-    // Because unauthenticated third-party LLMs are unreliable (502/404), 
-    // the Master relies on reliable ancient scrolls (Free Dictionary API + Wikipedia)
-    
-    // First, try Free Dictionary API for standard English definitions
+   
     let aiText = '';
     
     try {
@@ -326,14 +323,11 @@ async function sendWordplay() {
         throw new Error("Not in dictionary");
       }
     } catch (dictError) {
-      // If it's not a standard English dictionary word (like a foreign word 'Amor' or phrase), 
-      // the Master consults the great encyclopedia scrolls (Wikipedia).
-
-      // Cleanse conversational prompts like "Tell me about the spanish word amor" -> "amor"
+      
       let searchWord = text.replace(/tell me (more )?about the (spanish|japanese|french|german|italian|russian|chinese) word /i, '').trim();
       searchWord = searchWord.replace(/tell me (more )?about /i, '').trim();
 
-      // Guess language code based on user prompt (default 'en' if not specified)
+     
       let langCode = 'en';
       if (/spanish/i.test(text)) langCode = 'es';
       else if (/japanese/i.test(text)) langCode = 'ja';
@@ -346,7 +340,7 @@ async function sendWordplay() {
       const wikiRes = await fetch(`https://${langCode}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(searchWord)}`);
       
       if (!wikiRes.ok) {
-         // Fallback to English wiki if foreign wiki fails
+         
          const fallbackRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(searchWord)}`);
          if (!fallbackRes.ok) throw new Error("Not in Wiki at all");
          
@@ -361,7 +355,7 @@ async function sendWordplay() {
          
          aiText = `<strong style="color: var(--imperial-gold); font-size: 1.1em;">${wikiData.title}</strong><br><br>`;
          
-         // In a real app, we'd translate the foreign extract, but for Master Xian, explaining it works.
+         
          aiText += `<p>${wikiData.extract}</p>`;
       }
     }
@@ -393,7 +387,7 @@ function appendMessage(content, sender) {
   return id;
 }
 
-// -- Learn Section Path Logic --
+
 const learnModal = document.getElementById('learn-modal');
 const closeLearnModalBtn = document.getElementById('close-learn-modal');
 const learnLangTitle = document.getElementById('learn-lang-title');
@@ -402,15 +396,15 @@ const learnOfficialDesc = document.getElementById('learn-official-desc');
 const pathDetails = document.getElementById('learning-path-details');
 const pathLevelsContainer = document.getElementById('path-levels-container');
 
-// Premium aesthetic background imagery for different cultures
+
 const languageBackgrounds = {
-  'Japanese': 'url("https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=2070&auto=format&fit=crop")', // Sakura landscape
-  'Chinese': 'url("https://4kwallpapers.com/images/walls/thumbs_3t/4772.jpg")', // User provided Red Lantern Street
-  'Latin American Spanish': 'url("https://4kwallpapers.com/images/walls/thumbs_3t/14129.jpg")', // User provided Mexico City
-  'Russian': 'url("https://images.unsplash.com/photo-1547448415-e9f5b28e570d?q=80&w=2070&auto=format&fit=crop")', // Moscow/Winter aesthetic
-  'French': 'url("https://images.unsplash.com/photo-1499856871958-5b9627545d1a?q=80&w=2020&auto=format&fit=crop")', // Paris romantic vibe
-  'Italian': 'url("https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?q=80&w=2067&auto=format&fit=crop")', // Italian coast/Rome
-  'German': 'url("https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=2070&auto=format&fit=crop")' // Neuschwanstein Castle/Bavarian Alps
+  'Japanese': 'url("https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=2070&auto=format&fit=crop")', 
+  'Chinese': 'url("https://4kwallpapers.com/images/walls/thumbs_3t/4772.jpg")', 
+  'Latin American Spanish': 'url("https://4kwallpapers.com/images/walls/thumbs_3t/14129.jpg")', 
+  'Russian': 'url("https://images.unsplash.com/photo-1547448415-e9f5b28e570d?q=80&w=2070&auto=format&fit=crop")', 
+  'French': 'url("https://images.unsplash.com/photo-1499856871958-5b9627545d1a?q=80&w=2020&auto=format&fit=crop")', 
+  'Italian': 'url("https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?q=80&w=2067&auto=format&fit=crop")', 
+  'German': 'url("https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=2070&auto=format&fit=crop")' 
 };
 
 let currentSelectedLanguage = '';
@@ -419,18 +413,18 @@ function openLearnModal(lang) {
   currentSelectedLanguage = lang;
   learnLangTitle.innerText = lang;
 
-  // Set aesthetic cultural background
+  
   if (languageBackgrounds[lang]) {
     learnModal.style.backgroundImage = languageBackgrounds[lang];
   } else {
     learnModal.style.backgroundImage = 'none';
   }
 
-  // Reset path details view
+  
   pathDetails.classList.add('hidden');
   pathLevelsContainer.innerHTML = '';
 
-  // Update Official Level Title/Desc based on language
+  
   if (lang === 'Japanese') {
     learnOfficialTitle.innerHTML = '<i class="fa-solid fa-certificate"></i> JLPT Levels';
     learnOfficialDesc.innerText = 'Master the Japanese Language Proficiency Test standard levels from N5 to N1.';
@@ -438,7 +432,7 @@ function openLearnModal(lang) {
     learnOfficialTitle.innerHTML = '<i class="fa-solid fa-certificate"></i> HSK Levels';
     learnOfficialDesc.innerText = 'Conquer the Hanyu Shuiping Kaoshi standard levels for Mandarin proficiency.';
   } else {
-    // European Languages
+    
     learnOfficialTitle.innerHTML = '<i class="fa-solid fa-certificate"></i> CEFR Levels';
     learnOfficialDesc.innerText = 'Follow the Common European Framework of Reference from A1 to C2.';
   }
@@ -458,7 +452,7 @@ window.addEventListener('click', (e) => {
 
 function startLearningPath(type) {
   pathDetails.classList.remove('hidden');
-  pathLevelsContainer.innerHTML = ''; // clear old
+  pathLevelsContainer.innerHTML = ''; 
 
   let levels = [];
 
@@ -472,7 +466,7 @@ function startLearningPath(type) {
     } else if (currentSelectedLanguage === 'Chinese') {
       levels = ['HSK 1', 'HSK 2', 'HSK 3', 'HSK 4', 'HSK 5', 'HSK 6'];
     } else {
-      // European
+     
       levels = ['A1 (Beginner)', 'A2 (Elementary)', 'B1 (Intermediate)', 'B2 (Upper Intermediate)', 'C1 (Advanced)', 'C2 (Mastery)'];
     }
   } else if (type === 'self') {
@@ -487,9 +481,9 @@ function startLearningPath(type) {
     ];
   }
 
-  // Handle building the buttons depending on path type
+ 
   if (type === 'self') {
-    // Multi-select logic for Self Learning
+    
     const selectedOptions = new Set();
 
     levels.forEach(lvl => {
@@ -523,7 +517,7 @@ function startLearningPath(type) {
     pathLevelsContainer.appendChild(confirmBtn);
 
   } else {
-    // Single-select logic for Grade / Official
+   
     levels.forEach(lvl => {
       const btn = document.createElement('button');
       btn.className = 'path-lvl-btn';
@@ -533,6 +527,6 @@ function startLearningPath(type) {
     });
   }
 
-  // Scroll to the dynamically added content
+ 
   pathDetails.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
