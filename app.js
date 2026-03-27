@@ -5,7 +5,7 @@ function createParticles() {
   const container = document.getElementById('particles');
   if (!container) return;
 
-  const particleCount = 39; // Amount of particles on screen
+  const particleCount = 69; // Amount of particles on screen
 
   for (let i = 0; i < particleCount; i++) {
     createSingleParticle(container);
