@@ -5,7 +5,7 @@ function createParticles() {
   const container = document.getElementById('particles');
   if (!container) return;
 
-  const particleCount = 69; // Amount of particles on screen
+  const particleCount = 69; 
 
   for (let i = 0; i < particleCount; i++) {
     createSingleParticle(container);
@@ -14,7 +14,7 @@ function createParticles() {
 
 function createSingleParticle(container) {
   const particle = document.createElement('div');
-  particle.className = 'sakura'; // Focus exclusively on peaceful sakura
+  particle.className = 'sakura'; 
 
   // Randomize starting position, animation duration, and delay
   const startX = Math.random() * 100; // 0 to 100vw
